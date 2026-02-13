@@ -74,7 +74,7 @@ const entries = [
      We did'nt kiss but I guess giving her time to deal with her emotions is for the best.`
   },
   {
-    image: "assets/images/couple/10-8-22.JPG",
+    image: "assets/images/couple/10-8-22.jpg",
     date: "10 August, 2022",
     location: "Bhubaneswar, Odisha",
     text: `Dear Diary, (we kissed).
