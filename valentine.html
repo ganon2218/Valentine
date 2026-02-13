@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Are you my Valentine?</title>
+
+<style>
+  body {
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: "Segoe UI", sans-serif;
+
+    background: url("assets/images/bg/bgLanding.jpg") no-repeat center center/cover;
+  }
+
+  .card {
+    background: rgba(255, 255, 255, 0.12);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+
+    border-radius: 18px;
+    padding: 35px;
+    width: 380px;
+    text-align: center;
+    color: white;
+
+    box-shadow: 0 8px 40px rgba(0,0,0,0.35);
+  }
+
+  h2 {
+    margin-bottom: 10px;
+  }
+
+  p {
+    font-size: 14px;
+    opacity: 0.9;
+  }
+
+  select, input {
+    width: 100%;
+    padding: 12px;
+    margin-top: 12px;
+    border-radius: 8px;
+    border: none;
+    outline: none;
+  }
+
+  button {
+    width: 100%;
+    padding: 12px;
+    margin-top: 18px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+  }
+
+  button:hover {
+    transform: scale(1.02);
+  }
+</style>
+</head>
+
+<body>
+
+<div class="card">
+  <h2>Are you my Valentine?</h2>
+
+  <p>Where did I attempt to teach you how to play my guitar?</p>
+
+  <select id="guitar">
+    <option value="">Choose wisely...</option>
+    <option>College classroom</option>
+    <option>Campus 15 (CS Engg)</option>
+    <option>Terrace</option>
+    <option>Cafe</option>
+    <option>Campus 13(Electronics Engg.)</option>
+    <option>Campus 6(Sculpture Park)</option>
+    <option>Campus 3</option>
+  </select>
+
+  <p>What is my PAN number?</p>
+
+  <input id="pan" type="text" placeholder="ABCDE1234F">
+
+  <button onclick="checkAnswer()">Verify</button>
+</div>
+
+<script>
+async function hashAnswer(answer) {
+  const encoder = new TextEncoder();
+  const data = encoder.encode(answer);
+  const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+  const hashArray = Array.from(new Uint8Array(hashBuffer));
+  return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+}
+
+async function checkAnswer() {
+  const guitarAnswer = document.getElementById("guitar").value;
+  const panAnswer = document
+    .getElementById("pan")
+    .value
+    .trim()
+    .toUpperCase();
+
+  const guitarHash = await hashAnswer(guitarAnswer);
+  const panHash = await hashAnswer(panAnswer);
+
+  const correctGuitarHash = "2d23f094088c7e57bd2db7e07a5d2539dc03b13a69aaefc83bf7ac4629e5a807";
+  const correctPANHash = "02c8a58beedc580eb9ff735d50f4e4d5892e59c89eaa06598471098fc0f9fec3";
+
+  if (guitarHash === correctGuitarHash && panHash === correctPANHash) {
+    window.location.href = "DearDiary.html";
+  } else {
+    window.location.href = "sorry.html";
+  }
+}
+</script>
+
+</body>
+</html>

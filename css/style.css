@@ -1,0 +1,254 @@
+body {
+  margin: 0;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  perspective: 1200px;
+
+  background: url("../assets/images/bg/bgDearDiary.jpg");
+  background-repeat: repeat;
+}
+
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(circle, rgba(0,0,0,0) 40%, rgba(0,0,0,0.35));
+  pointer-events: none;
+}
+
+#scene {
+  position: relative;
+  width: 840px;
+  height: 560px;
+}
+
+#cover {
+  position: absolute;
+  left: 390px;
+
+  width: 420px;
+  height: 560px;
+  border-radius: 10px;
+
+  background:
+    linear-gradient(145deg, rgba(160,80,60,1), rgba(120,60,50,1)),
+    url("../assets/images/bg/bgDiaryCover.jpg");
+
+  background-blend-mode: multiply;
+  background-size: cover;
+
+  box-shadow:
+    0 20px 40px rgba(0,0,0,0.5),
+    inset 0 0 15px rgba(0,0,0,0.25);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  cursor: pointer;
+  transform-origin: left center;
+  transition: transform 0.85s ease;
+}
+
+#cover.open {
+  transform: rotateY(-160deg);
+}
+
+.title {
+  font-family: "Great Vibes", cursive;
+  font-size: 52px;
+  color: #e0c46c;
+
+  text-shadow:
+    0 1px 0 #c9a93d,
+    0 2px 0 #b8962e,
+    0 4px 8px rgba(0,0,0,0.5);
+}
+
+/* SPREAD */
+#spread {
+  position: absolute;
+  left: -30px;
+  width: 840px;
+  height: 560px;
+  display: none;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
+
+.page {
+  width: 50%;
+  height: 100%;
+  float: left;
+  box-sizing: border-box;
+}
+
+/* LEFT PAGE */
+.blank-page {
+  background: #f6ecd7;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* RIGHT PAGE */
+.ruled-page {
+  background: repeating-linear-gradient(
+    #f4e9d8,
+    #f4e9d8 24px,
+    #cbbfa5 25px
+  );
+  font-family: "Patrick Hand", cursive;
+  font-size: 20px;
+  padding: 30px;
+}
+
+.entry {
+  max-width: 90%;
+}
+
+/* POLAROID */
+.polaroid {
+  background: white;
+  padding: 10px 10px 30px 10px;
+  transform: rotate(-4deg);
+  box-shadow: 0 6px 15px rgba(0,0,0,0.25);
+}
+
+.polaroid img {
+  width: 140px;
+  display: block;
+}
+
+/* scrapbook polaroid (same as sorry page) */
+.photo {
+  position: relative;
+  background: white;
+  padding: 12px 12px 35px 12px;
+  transform: rotate(-3deg);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.25);
+  display: inline-block;
+}
+
+.photo::before {
+  content: "";
+  width: 70px;
+  height: 18px;
+  background: rgba(255,255,255,0.7);
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  transform: translateX(-50%) rotate(-6deg);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.15);
+}
+
+.photo img {
+  width: 260px;
+  height: auto;
+  display: block;
+}
+.entry-header {
+  margin-bottom: 20px;
+}
+
+.date {
+  font-size: 22px;
+  font-weight: bold;
+}
+
+.location {
+  font-size: 16px;
+  opacity: 0.8;
+  margin-bottom: 10px;
+}
+
+.entry {
+  white-space: pre-line;
+}
+#pageNumber {
+  position: absolute;
+  bottom: 15px;
+  right: 20px;
+  font-size: 14px;
+  opacity: 0.6;
+}
+#prevBtn, #nextBtn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 28px;
+  border: none;
+  background: rgba(255,255,255,0.7);
+  padding: 12px 16px;
+  cursor: pointer;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+#prevBtn {
+  left: -110px;
+}
+
+#nextBtn {
+  right: -50px;
+}
+
+#prevBtn:hover, #nextBtn:hover {
+  background: white;
+}
+#prevBtn, #nextBtn {
+  display: none;
+}
+.entry.flip-out {
+  animation: flipOut 0.3s forwards;
+}
+
+.entry.flip-in {
+  animation: flipIn 0.3s forwards;
+}
+
+@keyframes flipOut {
+  from { opacity: 1; transform: translateX(0); }
+  to { opacity: 0; transform: translateX(-25px); }
+}
+
+@keyframes flipIn {
+  from { opacity: 0; transform: translateX(25px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+.photo img.blur-out {
+  animation: blurOut 0.35s forwards;
+}
+
+.photo img.blur-in {
+  animation: blurIn 0.35s forwards;
+}
+
+@keyframes blurOut {
+  from {
+    filter: blur(0px);
+    opacity: 1;
+    transform: scale(1);
+  }
+  to {
+    filter: blur(8px);
+    opacity: 0;
+    transform: scale(0.98);
+  }
+}
+
+@keyframes blurIn {
+  from {
+    filter: blur(8px);
+    opacity: 0;
+    transform: scale(1.02);
+  }
+  to {
+    filter: blur(0px);
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+

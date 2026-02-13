@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Dear Diary</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+
+
+</head>
+
+<body>
+
+<div id="scene">
+    <button id="prevBtn" onclick="prevEntry()">◀</button>
+    <button id="nextBtn" onclick="nextEntry()">▶</button>
+  <div id="spread">
+        <div class="page blank-page">
+            <div class="photo">
+                <img id="memoryPhoto" src="">
+            </div>
+        </div>
+
+        <div class="page ruled-page">
+            <div class="entry-header">
+                <div id="entryDate" class="date"></div>
+                <div id="entryLocation" class="location"></div>
+            </div>
+            <div id="entryText" class="entry"></div>
+            <div id="pageNumber"></div>
+        </div>
+
+    </div>    
+    
+  <div id="cover" onclick="openDiary()">
+    <div class="title">Dear Diary</div>
+  </div>
+
+</div>
+
+
+<script>
+function openDiary() {
+  const cover = document.getElementById("cover");
+  const spread = document.getElementById("spread");
+  document.getElementById("prevBtn").style.display = "block";
+  document.getElementById("nextBtn").style.display = "block";
+
+
+  cover.classList.add("open");
+
+  setTimeout(() => {
+    cover.style.display = "none";
+    spread.style.display = "block";
+  }, 700);
+}
+
+</script>
+<script src="js/diary.js"></script>
+</body>
+</html>
